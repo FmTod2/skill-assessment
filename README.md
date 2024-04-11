@@ -158,7 +158,8 @@ Email: `<your email>`<br/>
 
 </details>
 
-‼️ <i>Note: Docker is recommended as you have all the external dependecies needed are already present in the provided container. Without docker you may need to install some external dependencies like MySQL or some extra PHP extensions required by the project</i>
+> [!IMPORTANT]
+> Docker is recommended as you have all the external dependecies needed are already present in the provided container. Without docker you may need to install some external dependencies like MySQL or some extra PHP extensions required by the project
 
 ## Your first commit (IMPORTANT)
 
