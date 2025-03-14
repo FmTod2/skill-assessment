@@ -1,256 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center">
+    <a href="https://mylisterhub.com" target="_blank">
+        <img src="https://raw.githubusercontent.com/FmTod2/skill-assessment/7ff556c2bb35948c7ee4e23667191ed05d8f88f3/assets/logo.svg" width="75" alt="Logo" style="padding-right: 5px;">
+        <img src="https://raw.githubusercontent.com/FmTod2/skill-assessment/7ff556c2bb35948c7ee4e23667191ed05d8f88f3/assets/company.svg" width="400" alt="MyListerHub" style="padding-bottom: 2px;">
+    </a>
+</p>
 
-<p align="center"><a href="https://github.com/FmTod/">Guidelines</a></p>
+<p align="center">
+    <a href="https://github.com/FmTod/">Guidelines</a>
+</p>
 
-<p align="center"><a href="https://forms.gle/gSqn6SE3Wa65b3bS7">Questionnaire</a></p>
+<p align="center">
+    <a href="https://forms.gle/gSqn6SE3Wa65b3bS7">Questionnaire</a>
+</p>
 
-<p align="center"><a href="./LEAME.md">Spanish / Español</a></p>
+<p align="center">
+    <a href="./LEAME.md">Spanish / Español</a>
+</p>
 
-# Quotes App
+# Skill Assessment
 
-## Skill Assessment
+Quotes API Interaction Package with Rate Limiting, Caching, and Vue.js UI
 
-The challenge will contain a few core features most applications have. These include connecting to an API, basic MVC, exposing an API, and finally, writing tests.
+## Objective
 
-The API we want you to connect to is [https://dummyjson.com/docs/quotes](https://dummyjson.com/docs/quotes). All the logic related to fetching and manipulating quotes from this API should be encapsulated within a separate composer package located in `./packages/quotes`.
+To assess your ability to design, develop, test, and document a comprehensive Laravel package that consumes quote data from the `https://dummyjson.com/quotes` API, implements request rate limiting, utilizes local caching with efficient retrieval using binary search, and provides a pre-built, publishable UI built with Vue.js for interacting with the API.
 
-### Attention Programmers
+## Task
 
-Please read the following instructions carefully before beginning the skill test:
+Develop a Laravel package that simplifies interaction with the `https://dummyjson.com/quotes` public API. The package should include API interaction, rate limiting, caching, and a user interface built with Vue.js for displaying quotes. The UI's build artifacts should be publishable for customization.
 
-1. **Repository**:
-The project must be contained in the same repository adn application, both frontend and backend.
+**Time Allotment:** 8 - 12 hours
 
-2. **Complete All Tasks**:
-Each task is crucial and must be fully completed. Partial completion will not be considered.
+## Deliverables
 
-3. **Attention to Detail**:
-Pay close attention to the specifications and requirements for each task. Accuracy and adherence to instructions are key.
+* A Git repository link containing the complete Laravel package code.
+* A `README.md` file in the package root directory with clear instructions for installation, configuration, basic usage, rate limiting, caching, and accessing/publishing the Vue.js UI.
 
-4. **Quality of Work**:
-We are looking for clean, efficient, and well-documented code. Quality is as important as completion.
+## Requirements
 
-5. **Bonus Features**:
-Implementing additional features or enhancements not listed in the tasks will earn you extra points. Creativity and innovation are highly valued.
+1. **Package Structure:**
+    * Follow standard Laravel package development conventions.
+    * Include a service provider to register the package's functionality, routes, and publishable assets.
+    * Include the necessary directory structure for your Vue.js application (e.g., `resources/js`, `resources/views`).
 
-6. **Time Management**:
-We do not expect all tasks to be completed in one sitting.
+2. **API Client Service:**
+    * Create a service within the package that handles the communication with the `https://dummyjson.com/quotes` API using Laravel's HTTP client.
+    * This service should incorporate request rate limiting logic and local caching with binary search.
 
-7. **Submission**:
-Once you have completed all tasks, submit your work as instructed.
+3. **Configuration:**
+    * Provide a configuration file for the package (e.g., `config/quotes.php`).
+    * The configuration file should allow users to define:
+        * The base URL of the API (default to `https://dummyjson.com`).
+        * The maximum number of requests allowed per time window (e.g., per minute).
+        * The duration of the time window in seconds (e.g., 60 for one minute).
 
-## The application must have the following features
+4. **API Interaction Methods:**
+    * `getAllQuotes()`: Fetches all quotes from the `/quotes` endpoint.
+    * `getRandomQuote()`: Fetches a single random quote from the `/quotes/random` endpoint.
+    * `getQuote(int $id)`: Fetches a specific quote by its ID from the `/quotes/{id}` endpoint. This method should first check the local cache using binary search.
 
-1. User authentication and profile update page
-2. A separate composer package located in `./packages/quotes` that handles all quote-related functionality:
-    1. A facade that fetches a number of random quotes from the API
-    2. Implement rate limiting for API requests to prevent abuse. The API should be limited to 30 requests per minutes by default but should be customizable from the main application
-    3. An API route should be registered in the package to fetch a specified number of random quotes
-    4. An API route should be registered in the package to fetch your favorites quotes
-    5. An API route should be registered in the package to delete a quote from your favorites
-    6. All API routes should be customizable from the main application (prefix, middleware, etc.)
-    7. Above features are to be tested with Feature tests inside the package
-3. Separate admin authentication for moderating saved user quotes and banning users
-4. Frontend should be done with Vue.js and optionally Inertia.js
-    1. Typescript should be used for any frontend functionality
-    2. UI should be responsive
-5. All API route should be secured with an user token
-6. Above features are to be tested with Feature tests
+5. **Rate Limiting Implementation:**
+    * Implement a mechanism to track the number of requests made to the API within the configured time window.
+    * If the limit is exceeded, pause execution for a short period until the window resets and then retry the request.
 
-### Extra Credit
+6. **Local Caching with Efficient Retrieval:**
+    * Implement a local caching mechanism (e.g., an array) to store fetched quotes.
+    * The `getQuote(int $id)` method should first check this cache.
+    * **If the quote with the given ID is found in the cache, retrieve it using binary search (assuming the cached data is sorted by ID) and return it without making an API call.**
+    * If the quote is not in the cache, make an API call, store the fetched quote in the cache (ensuring the cache remains sorted by ID for binary search), and then return it.
 
-* Use composition API and setup script for Vue components
-* Use inertia to connect backend and frontend
-* Provide a separate file with documentation
+7. **Vue.js User Interface:**
+    * Build a user interface using Vue.js within your package. This UI should allow users to:
+        * View all quotes (potentially with pagination).
+        * View a random quote.
+        * View a specific quote by ID.
+    * This UI should make API requests to your package's backend to fetch the data.
 
-## Developer
+8. **Package API Routes:**
+    * Define API routes within your package (registered via the service provider, likely under a `/api/quotes` prefix) that your Vue.js application can consume. These routes should:
+        * `/api/quotes`: Return all quotes.
+        * `/api/quotes/random`: Return a random quote.
+        * `/api/quotes/{id}`: Return a specific quote by ID.
+    * Create controller(s) within your package to handle these API routes and interact with your API client service.
 
-Name: `<your name>` <br/>
-Email: `<your email>`<br/>
+9. **Serving the Vue.js Application:**
+    * Define a route in your package (e.g., `/quotes-ui`) that serves the main entry point of your Vue.js application. You will need to configure Vite within your package to build the Vue.js application into static assets.
 
-## Instructions
+10. **Publishable Assets:**
+    * Configure your package's service provider to make the built Vue.js application assets (e.g., the `dist` folder containing JavaScript and CSS) publishable to the main Laravel application using the `php artisan vendor:publish`. The published assets should reside in a logical directory within the main application's `public` directory (e.g., `public/vendor/your-package-name`).
 
-### DO NOT START A NEW LARAVEL APP, USE THIS BOILERPLATE INSTEAD
+11. **Usage:**
+    * Include instructions on how to install the package, configure it, and **how to access the pre-built Vue.js UI (the defined route, e.g., `/quotes-ui`).**
+    * Provide clear instructions on **how to publish the Vue.js UI assets** if a developer wants to customize the frontend. Include steps on where the assets are published and how they can be modified.
 
-### Cloning the repository
+12. **Testing:**
+    * Include unit tests for the API client service.
+    * Include basic feature tests for your package's API routes to ensure they return the correct data.
 
-1. Create a bare clone of the repository. (This is temporary and will be removed so just do it wherever.)
+13. **Documentation:**
+    * The `README.md` should include comprehensive documentation for all features, including clear instructions on accessing and publishing the Vue.js UI and any necessary build steps (e.g., running `npm install` and `npm run build` within the package's UI directory).
 
-    ```bash
-    git clone --bare https://github.com/FmTod2/skill-assessment.git
-    ```
+## Submission Instructions
 
-2. Create a new repository on GitHub.
+1. Create a new private repository on a platform like GitHub, GitLab, or Bitbucket.
+2. Develop the Laravel package according to the requirements outlined above.
+3. Ensure all tests pass and the documentation is complete.
+4. Grant access to your repository to the designated evaluator(s).
+5. Submit the repository link to the designated evaluator(s).
 
-3. Mirror-push your bare clone to your new repository.<br/>_Replace &lt;username&gt; with your actual Github username in the url below._<br/>_Replace &lt;repository&gt; with the name of your new repository._
-
-    ```shell
-    cd skill-assessment-quotes.git
-    git push --mirror https://github.com/<username>/<repository>.git
-    ```
-
-4. Delete the bare clone created in step 1.
-
-    ```shell
-    cd ..
-    rm -rf skill-assessment-quotes.git
-    ```
-
-5. You can now clone your repository, where you are going to be working, on your machine (in my case in the code folder).
-
-    ```shell
-    cd ~/code
-    git clone https://github.com/<username>/<repository>.git
-    ```
-
-## Getting Started
-
-1. Create a copy of the `.env.example` file as `.env`
-
-    ```bash
-    cp .env.example .env
-    ```
-
-2. Install dependencies:
-
-<details>
-<summary> a. Docker (Recommended)</summary>
-
-3. Install composer dependecies
-
-    ```shell
-    docker run --rm \
-        -u "$(id -u):$(id -g)" \
-        -v $(pwd):/var/www/html \
-        -w /var/www/html \
-        laravelsail/php81-composer:latest \
-        composer install --ignore-platform-reqs
-    ```
-
-4. Start the container (Sail):
-
-    ```shell
-    ./vendor/bin/sail up -d
-    ```
-
-5. Generate a new secret key:
-
-    ```shell
-    ./vendor/bin/sail artisan key:generate
-    ```
-
-</details>
-
-<details>
-<summary>b. Without Docker (Not recommended)</summary>
-
-3. Install all required dependencies
-
-    ```bash
-    composer install
-    ```
-
-4. Generate a new secret key:
-
-    ```shell
-    php artisan key:generate
-    ```
-
-</details>
-
-> [!IMPORTANT]
-> Docker is recommended as you have all the external dependecies needed are already present in the provided container. Without docker you may need to install some external dependencies like MySQL or some extra PHP extensions required by the project
-
-## Your first commit (IMPORTANT)
-
-1. Edit the README.md file and add your name and email.
-
-    ```diff
-    - Name: `<your name>` <br/>
-    - Email: `<your email>` <br/>
-    + Name: Jhon Doe <br/>
-    + Email: jhondoe@exmaple.com <br/>
-    ```
-
-2. Submit your first commit with just the changes to the README.md file. Must be done before starting the assignment.
-
-    ```shell
-    git add README.md
-    git commit -m "Initial commit"
-    git push
-    ```
-
-## Executing Commands
-
-<details>
-<summary>Docker/Sail</summary>
-
-### PHP Commands
-
-```shell
-./vendor/bin/sail php --version
- 
-./vendor/bin/sail php script.php
-```
-
-### Composer Commands
-
-```shell
-./vendor/bin/sail composer require laravel/sanctum
-```
-
-### Artisan Commands
-
-```shell
-./vendor/bin/sail artisan queue:work
-```
-
-### Node / NPM Commands
-
-```shell
-./vendor/bin/sail node --version
- 
-./vendor/bin/sail npm run dev
-```
-
-If you wish, you may use Yarn instead of NPM:
-
-```shell
-./vendor/bin/sail yarn
-```
-
-### Running Tests
-
-```shell
-./vendor/bin/sail test
-
-./vendor/bin/sail test --group orders
-```
-
-</details>
-
-<details>
-<summary>Without Docker</summary>
-
-### Artisan Commands
-
-```shell
-php artisan serve
-php artisan list
-```
-
-### Node / NPM Commands
-
-```shell
-npm run dev
-// or
-npm run build
-```
-
-### Running Tests
-
-```shell
-composer test
-```
-
-</details>
+Good luck!

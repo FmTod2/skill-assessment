@@ -1,179 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center">
+    <a href="https://mylisterhub.com" target="_blank">
+        <img src="https://raw.githubusercontent.com/FmTod2/skill-assessment/7ff556c2bb35948c7ee4e23667191ed05d8f88f3/assets/logo.svg" width="75" alt="Logo" style="padding-right: 5px;">
+        <img src="https://raw.githubusercontent.com/FmTod2/skill-assessment/7ff556c2bb35948c7ee4e23667191ed05d8f88f3/assets/company.svg" width="400" alt="MyListerHub" style="padding-bottom: 2px;">
+    </a>
+</p>
 
-# Quotes App
+<p align="center">
+    <a href="https://github.com/FmTod/">Guidelines</a>
+</p>
 
-## Evaluación de Habilidades
+<p align="center">
+    <a href="https://forms.gle/gSqn6SE3Wa65b3bS7">Questionnaire</a>
+</p>
 
-El desafío contendrá algunas características básicas que tienen la mayoría de las aplicaciones. Estas incluyen la conexión a una API, MVC básico, exposición de una API y, finalmente, la escritura de pruebas.
+<p align="center">
+    <a href="./README.md">Inglés / English</a>
+</p>
 
-La API a la que queremos que te conectes es <https://dummyjson.com/docs/quotes>. Toda la lógica relacionada con la obtención y manipulación de citas de esta API debe estar encapsulada dentro de un paquete de compositor separado ubicado en `./packages/quotes`.
+# Evaluación
 
-### Atención Programadores
+Paquete de Interacción con la API de Citas con Limitación de Tasa, Caché y UI en Vue.js
 
-Por favor, lea las siguientes instrucciones cuidadosamente antes de comenzar la prueba de habilidades:
+## Objetivo
 
-1. Repositorio: El proyecto debe estar contenido en el mismo repositorio y aplicación, tanto en el frontend como en el backend.
+Evaluar tu capacidad para diseñar, desarrollar, probar y documentar un paquete integral de Laravel que consuma datos de citas de la API `https://dummyjson.com/quotes`, implemente limitación de tasa de solicitudes, utilice caché local con recuperación eficiente usando búsqueda binaria, y proporcione una interfaz de usuario preconstruida y publicable con Vue.js para interactuar con la API.
 
-2. Completa las 11 tareas: Cada tarea es crucial y debe ser completada en su totalidad. No se considerará una finalización parcial.
+## Tarea
 
-3. Atención al detalle: Preste mucha atención a las especificaciones y requisitos de cada tarea. La precisión y el cumplimiento de las instrucciones son clave.
+Desarrollar un paquete de Laravel que simplifique la interacción con la API pública `https://dummyjson.com/quotes`. El paquete debe incluir interacción con la API, limitación de tasa, caché y una interfaz de usuario construida con Vue.js para mostrar las citas. Los artefactos de construcción de la UI deben ser publicables para su personalización.
 
-4. Calidad del trabajo: Estamos buscando un código limpio, eficiente y bien documentado. La calidad es tan importante como la finalización.
+**Tiempo Asignado:** 8 - 12 horas
 
-5. Características adicionales: La implementación de características o mejoras adicionales no enumeradas en las tareas te hará ganar puntos extra. La creatividad y la innovación son muy valoradas.
+## Entregables
 
-6. Gestión del tiempo: No esperamos que todas las tareas se completen en una sola sesión.
+* Un enlace a un repositorio Git que contenga el código completo del paquete de Laravel.
+* Un archivo `README.md` en el directorio raíz del paquete con instrucciones claras para la instalación, configuración, uso básico, limitación de tasa, caché y acceso/publicación de la UI en Vue.js.
 
-7. Presentación: Una vez que hayas completado todas las tareas, presenta tu trabajo como se indica.
+## Requisitos
 
-### La aplicación debe tener las siguientes características
+1. **Estructura del Paquete:**
+    * Sigue las convenciones estándar de desarrollo de paquetes de Laravel.
+    * Incluye un proveedor de servicios para registrar la funcionalidad del paquete, rutas y activos publicables.
+    * Incluye la estructura de directorios necesaria para tu aplicación Vue.js (por ejemplo, `resources/js`, `resources/views`).
 
-1. Autenticación de usuario y página de actualización de perfil
-2. Un paquete de compositor separado ubicado en ./packages/quotes que maneja toda la funcionalidad relacionada con las citas:
-    1. Una fachada que obtiene un número de citas aleatorias de la API
-    2. Implementar la limitación de la tasa para las solicitudes de API para prevenir el abuso. La API debe estar limitada a 30 solicitudes por minuto por defecto, pero debe ser personalizable desde la aplicación principal
-    3. Se debe registrar una ruta de API en el paquete para obtener un número especificado de citas aleatorias
-    4. Se debe registrar una ruta de API en el paquete para obtener tus citas favoritas
-    5. Se debe registrar una ruta de API en el paquete para eliminar una cita de tus favoritos
-    6. Todas las rutas de la API deben ser personalizables desde la aplicación principal (prefijo, middleware, etc.)
-    7. Las características anteriores deben ser probadas con pruebas de características dentro del paquete
-3. Autenticación de administrador separada para moderar las citas guardadas de los usuarios y prohibir usuarios
-4. El frontend debe hacerse con Vue.js y opcionalmente con Inertia.js
-    1. Typescript debe ser utilizado para cualquier funcionalidad de frontend
-    2. La interfaz de usuario debe ser responsive
-5. Todas las rutas de la API deben estar aseguradas con un token de usuario
-6. Las características anteriores deben ser probadas con pruebas de características
+2. **Servicio Cliente de API:**
+    * Crea un servicio dentro del paquete que maneje la comunicación con la API `https://dummyjson.com/quotes` usando el cliente HTTP de Laravel.
+    * Este servicio debe incorporar lógica de limitación de tasa de solicitudes y caché local con búsqueda binaria.
 
-#### Extra Credit
+3. **Configuración:**
+    * Proporciona un archivo de configuración para el paquete (por ejemplo, `config/quotes.php`).
+    * El archivo de configuración debe permitir a los usuarios definir:
+        * La URL base de la API (por defecto `https://dummyjson.com`).
+        * El número máximo de solicitudes permitidas por ventana de tiempo (por ejemplo, por minuto).
+        * La duración de la ventana de tiempo en segundos (por ejemplo, 60 para un minuto).
 
-- Utiliza la API de composición y el script de configuración para los componentes de Vue
-- Utiliza la inercia para conectar el backend y el frontend
-- Proporciona un archivo separado con documentación
+4. **Métodos de Interacción con la API:**
+    * `getAllQuotes()`: Obtiene todas las citas del endpoint `/quotes`.
+    * `getRandomQuote()`: Obtiene una cita aleatoria del endpoint `/quotes/random`.
+    * `getQuote(int $id)`: Obtiene una cita específica por su ID del endpoint `/quotes/{id}`. Este método debe primero verificar el caché local usando búsqueda binaria.
 
-## Desarrollador
+5. **Implementación de Limitación de Tasa:**
+    * Implementa un mecanismo para rastrear el número de solicitudes hechas a la API dentro de la ventana de tiempo configurada.
+    * Si se excede el límite, pausa la ejecución por un corto período hasta que la ventana se reinicie y luego reintenta la solicitud.
 
-Nombre: `<tu nombre>` <br/>
-Correo electrónico: `<tu correo electrónico>`<br/>
+6. **Caché Local con Recuperación Eficiente:**
+    * Implementa un mecanismo de caché local (por ejemplo, un array) para almacenar las citas obtenidas.
+    * El método `getQuote(int $id)` debe primero verificar este caché.
+    * Si la cita con el ID dado se encuentra en el caché, recupérala usando búsqueda binaria (asumiendo que los datos en caché están ordenados por ID) y devuélvela sin hacer una llamada a la API.
+    * Si la cita no está en el caché, haz una llamada a la API, almacena la cita obtenida en el caché (asegurando que el caché permanezca ordenado por ID para la búsqueda binaria) y luego devuélvela.
 
-## Instrucciones
+7. **Interfaz de Usuario en Vue.js:**
+    * Construye una interfaz de usuario usando Vue.js dentro de tu paquete. Esta UI debe permitir a los usuarios:
+        * Ver todas las citas (potencialmente con paginación).
+        * Ver una cita aleatoria.
+        * Ver una cita específica por ID.
+    * Esta UI debe hacer solicitudes a la API de tu paquete para obtener los datos.
 
-### NO INICIES UNA NUEVA APLICACIÓN LARAVEL, ¡UTILIZA ESTE ESQUELETO EN SU LUGAR
+8. **Rutas de la API del Paquete:**
+    * Define rutas de API dentro de tu paquete (registradas a través del proveedor de servicios, probablemente bajo un prefijo `/api/quotes`) que tu aplicación Vue.js pueda consumir. Estas rutas deben:
+        * `/api/quotes`: Devolver todas las citas.
+        * `/api/quotes/random`: Devolver una cita aleatoria.
+        * `/api/quotes/{id}`: Devolver una cita específica por ID.
+    * Crea controlador(es) dentro de tu paquete para manejar estas rutas de API e interactuar con tu servicio cliente de API.
 
-### Clonar el repositorio
+9. **Servir la Aplicación Vue.js:**
+    * Define una ruta en tu paquete (por ejemplo, `/quotes-ui`) que sirva el punto de entrada principal de tu aplicación Vue.js. Necesitarás configurar Vite dentro de tu paquete para construir la aplicación Vue.js en activos estáticos.
 
-1. Crea un clon sin contenido del repositorio. (Esto es temporal y se eliminará, así que hazlo donde sea.)
+10. **Activos Publicables:**
+    * Configura el proveedor de servicios de tu paquete para hacer que los activos construidos de la aplicación Vue.js (por ejemplo, la carpeta `dist` que contiene JavaScript y CSS) sean publicables en la aplicación principal de Laravel usando `php artisan vendor:publish`. Los activos publicados deben residir en un directorio lógico dentro del directorio `public` de la aplicación principal (por ejemplo, `public/vendor/your-package-name`).
 
-    ```bash
-    git clone --bare https://github.com/FmTod2/skill-assessment.git
-    ```
+11. **Uso:**
+    * Incluye instrucciones sobre cómo instalar el paquete, configurarlo y cómo acceder a la UI preconstruida de Vue.js (la ruta definida, por ejemplo, `/quotes-ui`).
+    * Proporciona instrucciones claras sobre cómo publicar los activos de la UI de Vue.js si un desarrollador desea personalizar el frontend. Incluye pasos sobre dónde se publican los activos y cómo pueden ser modificados.
 
-2. Crea un nuevo repositorio en GitHub.
+12. **Pruebas:**
+    * Incluye pruebas unitarias para el servicio cliente de API.
+    * Incluye pruebas básicas de características para las rutas de la API de tu paquete para asegurar que devuelvan los datos correctos.
 
-3. Haz un push en espejo de tu clon sin contenido a tu nuevo repositorio.<br/>_Reemplaza &lt;username&gt; con tu nombre de usuario real de GitHub en la URL de abajo._<br/>_Reemplaza &lt;repository&gt; con el nombre de tu nuevo repositorio._
+13. **Documentación:**
+    * El `README.md` debe incluir documentación completa para todas las características, incluyendo instrucciones claras sobre cómo acceder y publicar la UI de Vue.js y cualquier paso de construcción necesario (por ejemplo, ejecutar `npm install` y `npm run build` dentro del directorio de la UI del paquete).
 
-    ```shell
-    cd skill-assessment-quotes.git
-    git push --mirror https://github.com/<username>/<repository>.git
-    ```
+## Instrucciones de Envío
 
-4. Elimina el clon sin contenido creado en el paso 1.
+1. Crea un nuevo repositorio privado en una plataforma como GitHub, GitLab o Bitbucket.
+2. Desarrolla el paquete de Laravel según los requisitos descritos anteriormente.
+3. Asegúrate de que todas las pruebas pasen y la documentación esté completa.
+4. Otorga acceso a tu repositorio a los evaluadores designados.
+5. Envía el enlace del repositorio a los evaluadores designados.
 
-    ```shell
-    cd ..
-    rm -rf skill-assessment-quotes.git
-    ```
-
-5. Ahora puedes clonar tu repositorio, donde vas a trabajar, en tu máquina (en mi caso, en la carpeta de código).
-
-    ```shell
-    cd ~/code
-    git clone https://github.com/<username>/<repository>.git
-    ```
-
-## Empezando
-
-1. Crea una copia del archivo `.env.example` como `.env`
-
-    ```bash
-    cp .env.example .env
-    ```
-
-2. Instala las dependencias:
-
-<details>
-<summary> a. Docker (Recomendado)</summary>
-
-3. Instala las dependencias de Composer
-
-    ```shell
-    docker run --rm \
-        -u "$(id -u):$(id -g)" \
-        -v $(pwd):/var/www/html \
-        -w /var/www/html \
-        laravelsail/php81-composer:latest \
-        composer install --ignore-platform-reqs
-    ```
-
-4. Inicia el contenedor (Sail):
-
-    ```shell
-    ./vendor/bin/sail up -d
-    ```
-
-5. Genera una nueva clave secreta:
-
-    ```shell
-    ./vendor/bin/sail artisan key:generate
-    ```
-
-</details>
-
-<details>
-<summary>b. Sin Docker (No recomendado)</summary>
-
-3. Instala todas las dependencias requeridas
-
-    ```bash
-    composer install
-    ```
-
-4. Genera una nueva clave secreta:
-
-    ```shell
-    php artisan key:generate
-    ```
-
-</details>
-
-‼️ <i>Nota: Se recomienda Docker ya que todas las dependencias externas necesarias ya están presentes en el contenedor proporcionado. Sin Docker, es posible que debas instalar algunas dependencias externas como MySQL o algunas extensiones adicionales de PHP requeridas por el proyecto</i>
-
-## Tu primer commit (IMPORTANTE)
-
-1. Edita el archivo README.md y agrega tu nombre y correo electrónico.
-
-    ```diff
-    - Nombre: `<tu nombre>` <br/>
-    - Correo electrónico: `<tu correo electrónico>` <br/>
-    + Nombre: Jhon Doe <br/>
-    + Correo electrónico: jhondoe@ejemplo.com <br/>
-    ```
-
-2. Envía tu primer commit solo con los cambios al archivo README.md. Debe hacerse antes de comenzar la asignación.
-
-    ```shell
-    git add README.md
-    git commit -m "Commit inicial"
-    git push
-    ```
-
-## Ejecución de Comandos
-
-<details>
-<summary>Docker/Sail</summary>
-
-### Comandos de PHP
-
-```shell
-./vendor/bin/sail php --version
- 
-./vendor/bin/sail php script.php
+¡Buena suerte!
