@@ -1,4 +1,23 @@
-# Laravel Developer Technical Skill Assessment Test
+<p align="center">
+    <a href="https://mylisterhub.com" target="_blank">
+        <img src="https://raw.githubusercontent.com/FmTod2/skill-assessment/7ff556c2bb35948c7ee4e23667191ed05d8f88f3/assets/logo.svg" width="75" alt="Logo" style="padding-right: 5px;">
+        <img src="https://raw.githubusercontent.com/FmTod2/skill-assessment/7ff556c2bb35948c7ee4e23667191ed05d8f88f3/assets/company.svg" width="400" alt="MyListerHub" style="padding-bottom: 2px;">
+    </a>
+</p>
+
+<p align="center">
+    <a href="https://github.com/FmTod/">Guidelines</a>
+</p>
+
+<p align="center">
+    <a href="https://forms.gle/gSqn6SE3Wa65b3bS7">Questionnaire</a>
+</p>
+
+<p align="center">
+    <a href="./LEAME.md">Spanish / Español</a>
+</p>
+
+# Skill Assessment
 
 Quotes API Interaction Package with Rate Limiting, Caching, and Vue.js UI
 
