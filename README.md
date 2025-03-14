@@ -36,7 +36,7 @@ Develop a Laravel package that simplifies interaction with the `https://dummyjso
 * A Git repository link containing the complete Laravel package code.
 * A `README.md` file in the package root directory with clear instructions for installation, configuration, basic usage, rate limiting, caching, and accessing/publishing the Vue.js UI.
 
-## Detailed Requirements
+## Requirements
 
 1. **Package Structure:**
     * Follow standard Laravel package development conventions.
