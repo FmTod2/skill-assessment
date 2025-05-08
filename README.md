@@ -104,6 +104,7 @@ Develop a Laravel package that simplifies interaction with the `https://dummyjso
 12. **Testing:**
     * Include unit tests for the API client service.
     * Include basic feature tests for your package's API routes to ensure they return the correct data.
+    * Test must be created following 
 
 13. **Documentation:**
     * The `README.md` should include comprehensive documentation for all features, including clear instructions on accessing and publishing the Vue.js UI and any necessary build steps (e.g., running `npm install` and `npm run build` within the package's UI directory).
