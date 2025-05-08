@@ -33,6 +33,9 @@ Develop a Laravel package that simplifies interaction with the `https://dummyjso
 > Repository should follow the common structure for Laravel packages, it should not be an app.
 
 > [!IMPORTANT]
+> Package should be installable and able to serve the frontend in any host app. If a host app is submitted it wont be considered when scoring the assessment and only the code inside of the package would be take into account.
+
+> [!IMPORTANT]
 > All requirements must be completed in order for the assessment to be evaluated. This is not optional.
 
 ## Deliverables
@@ -86,9 +89,10 @@ Develop a Laravel package that simplifies interaction with the `https://dummyjso
         * View a random quote.
         * View a specific quote by ID.
     * This UI should make API requests to your package's backend to fetch the data.
+    * Components must be writing using the **Composition API, Setup Script and Typescript**
 
-9. **Serving the Vue.js Application:**
-    * Define a route in your package (e.g., `/quotes-ui`) that serves the main entry point of your Vue.js application. You will need to configure Vite within your package to build the Vue.js application into static assets.
+9. **Serving the Vue.js Frontend:**
+    * Define a route in your package (e.g., `/quotes-ui`) that serves the main entry point of your Vue.js fronend. You will need to configure Vite within your package to build the Vue.js files into static assets.
 
 10. **Publishable Assets:**
     * Configure your package's service provider to make the built Vue.js application assets (e.g., the `dist` folder containing JavaScript and CSS) publishable to the main Laravel application using the `php artisan vendor:publish`. The published assets should reside in a logical directory within the main application's `public` directory (e.g., `public/vendor/your-package-name`).
