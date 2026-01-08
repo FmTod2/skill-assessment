@@ -17,103 +17,100 @@
     <a href="./LEAME.md">Spanish / Español</a>
 </p>
 
-# Skill Assessment
-
-Quotes API Interaction Package with Rate Limiting, Caching, and Vue.js UI
+# Skill Assessment: Laravel Package & Architecture
 
 ## Objective
 
-To assess your ability to design, develop, test, and document a comprehensive Laravel package that consumes quote data from the `https://dummyjson.com/quotes` API, implements request rate limiting, utilizes local caching with efficient retrieval using binary search, and provides a pre-built, publishable UI built with Vue.js for interacting with the API.
+To assess your ability to design a modular, scalable Laravel package. We are looking for **clean architecture**, **ecosystem familiarity**, **algorithmic problem solving**, and **infrastructure automation**.
 
-## Task
+## The Task
 
-Develop a Laravel package that simplifies interaction with the `https://dummyjson.com/quotes` public API. The package should include API interaction, rate limiting, caching, and a user interface built with Vue.js for displaying quotes. The UI's build artifacts should be publishable for customization.
+Develop a Laravel package that interacts with the `https://dummyjson.com/quotes` API. The package must serve as a bridge to fetch, cache, and display quotes via a Vue.js UI, while strictly adhering to rate limits.
 
-> [!IMPORTANT]
-> Repository should follow the common structure for Laravel packages, it should not be an app.
+## Submission Constraints
 
-> [!IMPORTANT]
-> Package should be installable and able to serve the frontend in any host app. If a host app is submitted it wont be considered when scoring the assessment and only the code inside of the package would be take into account.
-
-> [!IMPORTANT]
-> All requirements must be completed in order for the assessment to be evaluated. This is not optional.
-
-## Deliverables
-
-* A public Git repository link containing the complete Laravel package code.
-* A `README.md` file in the package root directory with clear instructions for installation, configuration, basic usage, rate limiting, caching, and accessing/publishing the Vue.js UI.
+> [!WARNING]
+> **Read Carefully:** Failure to adhere to these constraints will result in immediate disqualification.
+> 1. **Structure:** The repository must contain **only** the Laravel Package code. Do not commit a full Laravel Application.
+> 2. **No AI:** This task must be completed entirely without AI assistants (Copilot, ChatGPT, etc.).
+> 3. **Completeness:** All requirements must be functional within the provided Docker environment.
 
 ## Requirements
 
-1. **Package Structure:**
-    * Follow standard Laravel package development conventions.
-    * Include a service provider to register the package's functionality, routes, and publishable assets.
-    * Include the necessary directory structure for your Vue.js application (e.g., `resources/js`, `resources/views`).
+### 1. Package Architecture
 
-2. **API Client Service:**
-    * Create a service within the package that handles the communication with the `https://dummyjson.com/quotes` API using Laravel's HTTP client.
-    * This service should incorporate request rate limiting logic and local caching with binary search.
+* Follow standard Laravel package conventions (Service Provider, Facades, Config Publishing).
+* **Bonus:** Use of modern ecosystem libraries (e.g., **Saloon** for API integrations) is permitted and encouraged.
 
-3. **Configuration:**
-    * Provide a configuration file for the package (e.g., `config/quotes.php`).
-    * The configuration file should allow users to define:
-        * The base URL of the API (default to `https://dummyjson.com`).
-        * The maximum number of requests allowed per time window (e.g., per minute).
-        * The duration of the time window in seconds (e.g., 60 for one minute).
+### 2. API Service & Rate Limiting
 
-4. **API Interaction Methods:**
-    * `getAllQuotes()`: Fetches all quotes from the `/quotes` endpoint.
-    * `GetRandomQuote()`: Fetches a single random quote from the `/quotes/random` endpoint.
-    * `getQuote(int $id)`: Fetches a specific quote by its ID from the `/quotes/{id}` endpoint. This method should first check the local cache using binary search.
+* Create a service class to communicate with `https://dummyjson.com/quotes`.
+* **Configuration:** Users must be able to define the `base_url`, `request_limit` (e.g., 5), and `time_window` (e.g., 30 seconds) via a published config file.
+* **Constraint:** The Service **must not** sleep/wait. If the rate limit is exceeded, it must throw a custom `RateLimitExceededException`.
+* **Persistence:** Use a cache driver to store hit counts so limits persist across requests.
 
-5. **Rate Limiting Implementation:**
-    * Implement a mechanism to track the number of requests made to the API within the configured time window.
-    * If the limit is exceeded, pause execution for a short period until the window resets and then retry the request.
+### 3. Caching & Algorithmic Constraint
 
-6. **Local Caching with Efficient Retrieval:**
-    * Implement a local caching mechanism (e.g., an array) to store fetched quotes.
-    * The `getQuote(int $id)` method should first check this cache.
-    * **If the quote with the given ID is found in the cache, retrieve it using binary search (assuming the cached data is sorted by ID) and return it without making an API call.**
-    * If the quote is not in the cache, make an API call, store the fetched quote in the cache (ensuring the cache remains sorted by ID for binary search), and then return it.
+* **Constraint:** You must implement a custom caching strategy for `getQuote(int $id)`.
+* **Storage:** Store fetched quotes in the cache as a **flat, numerically indexed array** sorted by ID (e.g., `[{id: 1...}, {id: 5...}]`). Do **not** use the ID as the array key.
+* **Retrieval:** When `getQuote($id)` is called:
+    1. Retrieve the full list from the cache.
+    2. **Implement a Binary Search algorithm** to find the quote with the matching ID.
+    3. If found, return it.
+    4. If not found, fetch from API, re-sort the list, update the cache, and return.
 
-7. **Package API Routes:**
-    * Define API routes within your package (registered via the service provider, likely under a `/api/quotes` prefix) that your Vue.js application can consume. These routes should:
-        * `/api/quotes`: Return all quotes.
-        * `/api/quotes/random`: Return a random quote.
-        * `/api/quotes/{id}`: Return a specific quote by ID.
-    * Create controller(s) within your package to handle these API routes and interact with your API client service.
 
-8. **Vue.js User Interface:**
-    * Build a user interface using Vue.js within your package. This UI should allow users to:
-        * View all quotes (potentially with pagination).
-        * View a random quote.
-        * View a specific quote by ID.
-    * This UI should make API requests to your package's backend to fetch the data.
-    * Components must be writing using the **Composition API, Setup Script and Typescript**
+* *Note: We are aware this is not the most efficient PHP strategy. We are testing your ability to implement algorithms and manipulate data structures.*
 
-9. **Serving the Vue.js Frontend:**
-    * Define a route in your package (e.g., `/quotes-ui`) that serves the main entry point of your Vue.js fronend. You will need to configure Vite within your package to build the Vue.js files into static assets.
+### 4. Smart Import Command (Problem Solving)
 
-10. **Publishable Assets:**
-    * Configure your package's service provider to make the built Vue.js application assets (e.g., the `dist` folder containing JavaScript and CSS) publishable to the main Laravel application using the `php artisan vendor:publish`. The published assets should reside in a logical directory within the main application's `public` directory (e.g., `public/vendor/your-package-name`).
+* Create a command: `php artisan quotes:batch-import {count}`.
+* **Goal:** Fetch `{count}` *unique* quotes and store them in the cache.
+* **Logic:**
+    * The command must catch the `RateLimitExceededException` from your service and **sleep/wait** until the window resets, then retry automatically.
+    * It must ensure uniqueness (discard duplicates found in the API that already exist in cache).
+    * Provide real-time terminal feedback (e.g., "Fetched 5/20... Limit hit, waiting 30s...").
 
-11. **Usage:**
-    * Include instructions on how to install the package, configure it, and **how to access the pre-built Vue.js UI (the defined route, e.g., `/quotes-ui`).**
-    * Provide clear instructions on **how to publish the Vue.js UI assets** if a developer wants to customize the frontend. Include steps on where the assets are published and how they can be modified.
 
-12. **Testing:**
-    * Include unit tests for the API client service.
-    * Include basic feature tests for your package's API routes to ensure they return the correct data.
-    * Test must be created using PestPHP 
 
-13. **Documentation:**
-    * The `README.md` should include comprehensive documentation for all features, including clear instructions on accessing and publishing the Vue.js UI and any necessary build steps (e.g., running `npm install` and `npm run build` within the package's UI directory).
+### 5. Vue.js User Interface
 
-## Submission Instructions
+* Build a UI using **Vue.js (Composition API + TypeScript)**.
+* **Features:**
+    * View all quotes (Paginated).
+    * View a single quote by ID (must use the backend Binary Search logic).
 
-1. Create a new public repository on a platform like GitHub, GitLab, or Bitbucket.
-2. Develop the Laravel package according to the requirements outlined above.
-3. Ensure all tests pass and the documentation is complete.
-5. Submit the repository link to the designated evaluator(s).
+
+* **Integration:**
+* Register a web route (e.g., `/quotes-ui`) in the package to serve the SPA.
+* Configure Vite to build assets into a `dist/` folder within the package.
+* Ensure assets can be published to a host app via `vendor:publish`.
+
+
+
+### 6. Infrastructure (Docker)
+
+* **Requirement:** The repository must be clean (package files only), but you must provide a `docker-compose.yml` (and `Dockerfile`) that builds a functional test environment.
+* **The Build Process:**
+    * The container should automatically install a fresh Laravel application.
+    * It should copy your package code into the container.
+    * It should link/install the package into the fresh Laravel app (e.g., using Composer `path` repositories).
+
+
+* **Goal:** The evaluator should be able to clone your repo, run `docker-compose up`, visit `localhost:8080/quotes-ui`, and see the working application without manual installation steps.
+
+### 7. Testing
+
+* **Unit Tests:** Test the Binary Search algorithm in isolation.
+* **Feature Tests:** Test the API endpoints and the Console Command (mocking the API to simulate rate limits).
+* **Tool:** Tests must be written using **PestPHP**.
+
+## Deliverables
+
+1. Public Git Repository Link.
+2. `README.md` with:
+* Installation guide.
+* Explanation of your Rate Limiting strategy.
+* Instructions to run the Docker environment.
 
 Good luck!
