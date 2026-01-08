@@ -52,12 +52,12 @@ Develop a Laravel package that interacts with the `https://dummyjson.com/quotes`
 ### 3. Caching & Algorithmic Constraint
 
 * **Constraint:** You must implement a custom caching strategy for `getQuote(int $id)`.
-* **Storage:** Store fetched quotes in the cache as a **flat, numerically indexed array** sorted by ID (e.g., `[{id: 1...}, {id: 5...}]`). Do **not** use the ID as the array key.
+* **Storage:** Store fetched quotes in the cache as a **flat PHP array with sequential integer keys (0, 1, 2, ...)**, where each element is a quote object, and the array is **sorted by the quote's `id` property** (e.g., `[{id: 1...}, {id: 5...}]`). Do **not** use the quote ID as the array key.
 * **Retrieval:** When `getQuote($id)` is called:
     1. Retrieve the full list from the cache.
     2. **Implement a Binary Search algorithm** to find the quote with the matching ID.
     3. If found, return it.
-    4. If not found, fetch from API, re-sort the list, update the cache, and return.
+    4. If not found, fetch the quote from the API, insert it into the existing array of cached quotes, re-sort the combined array by `id`, update the cache with this updated array, and return the newly fetched quote.
 
 
 * *Note: We are aware this is not the most efficient PHP strategy. We are testing your ability to implement algorithms and manipulate data structures.*
@@ -68,7 +68,7 @@ Develop a Laravel package that interacts with the `https://dummyjson.com/quotes`
 * **Goal:** Fetch `{count}` *unique* quotes and store them in the cache.
 * **Logic:**
     * The command must catch the `RateLimitExceededException` from your service and **sleep/wait** until the window resets, then retry automatically.
-    * It must ensure uniqueness (discard duplicates found in the API that already exist in cache).
+    * It must ensure uniqueness by quote ID: if the API returns a quote whose ID is already present either in the cache or in the set collected during the current command run, discard that quote and keep fetching until `{count}` distinct IDs have been stored (subject to rate limits).
     * Provide real-time terminal feedback (e.g., "Fetched 5/20... Limit hit, waiting 30s...").
 
 
@@ -109,8 +109,8 @@ Develop a Laravel package that interacts with the `https://dummyjson.com/quotes`
 
 1. Public Git Repository Link.
 2. `README.md` with:
-* Installation guide.
-* Explanation of your Rate Limiting strategy.
-* Instructions to run the Docker environment.
+    * Installation guide.
+    * Explanation of your Rate Limiting strategy.
+    * Instructions to run the Docker environment.
 
 Good luck!
