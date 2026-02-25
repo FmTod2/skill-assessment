@@ -1,43 +1,14 @@
-Good. This is a serious test.
-
-But your problem isn’t the difficulty.
-It’s **clarity + enforceability**.
-
-Right now:
-
-* The requirements are dense.
-* Critical constraints are buried.
-* Disqualification rules aren’t front-loaded.
-* There’s no acknowledgment step.
-* You’re trying to catch AI, but you’re not structuring the test to naturally expose it.
-
-Yes — you should absolutely organize this into **explicit steps**. Not for them. For you.
-
-You want:
-
-1. Confirmation they read it.
-2. A structured checklist.
-3. A signed declaration.
-4. Clear auto-fail rules.
-
-Below is a tightened, enforceable version of your test.
+<p align="center">
+    <a href="./LEAME.md">Spanish / Español</a>
+</p
 
 ---
 
 # Skill Assessment: Laravel Package & Architecture
 
-## BEFORE YOU START – Mandatory Acknowledgment
+---
 
-Reply to this email with:
-
-1. “I confirm I will build a Laravel Package, not a Laravel Application.”
-2. “I confirm I will not use AI tools (ChatGPT, Copilot, etc.).”
-3. “I confirm I understand this repository must contain only package code.”
-4. Your estimated completion time.
-
-If you do not send this acknowledgment, do not begin.
-
-Failure to follow structural instructions will result in immediate disqualification.
+## This assessment must be completed independently and without AI assistance of any kind. Any submission that appears AI-generated will be rejected without further review.
 
 ---
 
@@ -261,47 +232,24 @@ README must include:
 
 ---
 
-# Now — Important Improvement
-
-You are trying to detect AI usage.
-
-Right now you're relying on a “No AI” rule. That won’t work.
-
-Instead, add this:
-
-### AI Detection Strategy (Silent)
-
-During interview, ask:
-
-* Why binary search over array instead of map?
-* How does Laravel package auto-discovery work?
-* Why not store quotes by ID as array keys?
-* How does cache persistence work across drivers?
-
-AI users collapse under follow-up questions.
-
-Don’t try to prevent AI.
-Design the process so AI users expose themselves.
+> [!WARNING]
+> **Read Carefully:** Failure to adhere to these constraints will result in immediate disqualification.
+> 1. **Structure:** The repository must contain **only** the Laravel Package code. Do not commit a full Laravel Application.
+> 2. **No AI:** This task must be completed entirely without AI assistants (Copilot, ChatGPT, etc.).
+> 3. **Completeness:** All requirements must be functional within the provided Docker environment.
 
 ---
 
-# Yes — Organize By Steps
+# Reasorces
 
-You were right.
-
-Send candidates:
-
-1. Qualification email
-2. Acknowledgment step
-3. Skill test
-4. Structured submission checklist
-
-That alone will eliminate 60% of careless submissions.
+<a href="https://github.com/FmTod/">Guidelines</a>
+<a href="https://forms.gle/gSqn6SE3Wa65b3bS7">Questionnaire</a>
 
 ---
 
-If you want, I can now:
+# Good luck!
 
-* Make a **shorter version** (some seniors won’t read walls of text)
-* Add a **scoring rubric**
-* Or help you redesign the test so it exposes architectural maturity even faster
+
+<img src="https://raw.githubusercontent.com/FmTod2/skill-assessment/7ff556c2bb35948c7ee4e23667191ed05d8f88f3/assets/company.svg" width="300" alt="MyListerHub" style="padding-bottom: 2px;">
+
+
