@@ -84,6 +84,8 @@ Develop a Laravel package that integrates with the [DummyJSON Quotes API](https:
 
 * **Testing:** Use **PestPHP**.
 * **Coverage:** Include unit tests for your data retrieval algorithm and feature tests for the API/CLI layers (mocking external HTTP calls).
+* **Unit Tests:** Must isolate and prove the $O(\log n)$ retrieval logic.
+* **Feature Tests:** Must mock API responses to simulate rate-limit hits and CLI retries.
 
 ## 4. Deliverables
 
